@@ -7,9 +7,9 @@ function Quiz({ category, questions, onQuizEnd }) {
   const [score, setScore] = useState(0);
   const [answers, setAnswers] = useState(Array(questions.length).fill(null));
   const currentQuestion = questions[currentIndex];
-  const time =15
+  const time = 15;
   const [Endtime, setEndtime] = useState(time);
-  
+
   const handleAnswer = (option) => {
     const newAnswers = [...answers];
     newAnswers[currentIndex] = option;
@@ -22,7 +22,7 @@ function Quiz({ category, questions, onQuizEnd }) {
   const handleNext = () => {
     if (currentIndex + 1 < questions.length) {
       setCurrentIndex((prev) => prev + 1);
-      setEndtime(time)
+      setEndtime(time);
     }
   };
 
@@ -37,7 +37,7 @@ function Quiz({ category, questions, onQuizEnd }) {
   };
 
   const handleFinish = () => {
-    onQuizEnd(score,answers);
+    onQuizEnd(score, answers);
   };
 
   return (
@@ -45,7 +45,7 @@ function Quiz({ category, questions, onQuizEnd }) {
       <h2>{category} Quiz</h2>
       <div className="question-card">
         <h3>{currentQuestion.question}</h3>
-        <Timer key={currentIndex}initialTime={Endtime} onTimeUp={handleTimeUp} />
+        <Timer key={currentIndex} initialTime={Endtime} onTimeUp={handleTimeUp} />
         <div className="options">
           {currentQuestion.options.map((option, index) => (
             <label key={index}>
@@ -69,6 +69,9 @@ function Quiz({ category, questions, onQuizEnd }) {
           ) : (
             <button onClick={handleFinish}>Finish</button>
           )}
+          <button onClick={handleFinish} className="finish-button">
+            Finish Quiz
+          </button>
         </div>
       </div>
     </div>
